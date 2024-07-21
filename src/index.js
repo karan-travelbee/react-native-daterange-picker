@@ -47,6 +47,7 @@ const DateRangePicker = ({
   buttonTextStyle,
   presetButtons,
   open,
+  onDismiss,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [weeks, setWeeks] = useState([]);
@@ -328,7 +329,10 @@ const DateRangePicker = ({
       <View style={mergedStyles.backdrop}>
         <TouchableWithoutFeedback
           style={styles.closeTrigger}
-          onPress={_onClose}
+          onPress={() => {
+            _onClose();
+            onDismiss();
+          }}
         >
           <View style={styles.closeContainer} />
         </TouchableWithoutFeedback>
@@ -415,6 +419,7 @@ DateRangePicker.defaultProps = {
 
 DateRangePicker.propTypes = {
   onChange: PropTypes.func.isRequired,
+  onDismiss: PropTypes.func,
   startDate: PropTypes.object,
   endDate: PropTypes.object,
   displayedDate: PropTypes.object,
